@@ -95,12 +95,11 @@ android {
         val storageProviderId = "$nameId.storage_provider"
 
         getByName("debug") {
-            applicationIdSuffix = ".debug"
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("customDebug")
-            resValue("string", "storageProviderAuthorities", "$storageProviderId.debug")
+            resValue("string", "storageProviderAuthorities", "$storageProviderId")
         }
         create("proguard") {
             initWith(getByName("debug"))
