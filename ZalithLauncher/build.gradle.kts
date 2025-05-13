@@ -63,15 +63,14 @@ configure<StringFogExtension> {
 
 android {
     namespace = nameId
-    compileSdk = 34
+    compileSdk = 35
 
     signingConfigs {
         create("releaseBuild") {
-            val pwd = System.getenv("MOVTERY_KEYSTORE_PASSWORD")
-            storeFile = file("movtery-key.jks")
-            storePassword = pwd
-            keyAlias = "mtp"
-            keyPassword = pwd
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
         }
         create("customDebug") {
             storeFile = file("debug.keystore")
@@ -84,7 +83,7 @@ android {
     defaultConfig {
         applicationId = nameId
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = launcherVersionCode
         versionName = launcherVersionName
         multiDexEnabled = true //important
