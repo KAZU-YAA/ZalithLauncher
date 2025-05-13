@@ -43,6 +43,7 @@
 // PojavLancher: fixme: are these wrong?
 #define FULL_VERSION "1.8.0-internal"
 #define DOT_VERSION "1.8"
+#define _XOPEN_SOURCE
 
 static const char* const_progname = "java";
 static const char* const_launcher = "openjdk";
@@ -84,6 +85,8 @@ _Noreturn static void abort_waiter_handler(int signal) {
     while(1) {}
 }
 
+int nice(int inc);
+
 static void abort_waiter_setup() {
     const static int tracked_signals[] = {SIGABRT};
     const static int ntracked = (sizeof(tracked_signals) / sizeof(tracked_signals[0]));
@@ -122,6 +125,7 @@ static void abort_waiter_setup() {
 
 static jint launchJVM(int margc, char** margv) {
    void* libjli = dlopen("libjli.so", RTLD_LAZY | RTLD_GLOBAL);
+   nice(-20);
    struct sigaction clean_sa;
    memset(&clean_sa, 0, sizeof (struct sigaction));
 
